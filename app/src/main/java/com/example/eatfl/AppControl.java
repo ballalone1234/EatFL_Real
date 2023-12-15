@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AppControl extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //Test save git
     public void bottom_navbar_show() {
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
