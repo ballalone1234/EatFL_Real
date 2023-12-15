@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EatFL" parent="Theme.Material3.DayNight">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/primary</item>
+        <!-- Customize your font theme here. -->
+        <item name="fontFamily">@font/roboto</item>
+
+    </style>
+
+    <style name="Theme.EatFL" parent="Base.Theme.EatFL" />
+</resources>

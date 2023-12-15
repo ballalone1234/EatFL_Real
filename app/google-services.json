@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "389942439050",
+    "project_id": "eatfl-47078",
+    "storage_bucket": "eatfl-47078.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389942439050:android:d7b96a7131ae16aa4fd173",
+        "android_client_info": {
+          "package_name": "com.example.eatfl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUu5dCajk4NqgEOq0i4LCx6i50hW3oq9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

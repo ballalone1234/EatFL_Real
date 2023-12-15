@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+    <!-- res/layout/activity_register.xml -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="30dp">
+
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="-13dp"
+            android:background="@drawable/cus_edit"
+            android:fontFamily="sans-serif"
+            android:hint="@string/username_hint"
+            android:paddingStart="15dp" />
+
+        <EditText
+            android:id="@+id/editTextPassword2"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/editTextUsername"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/cus_edit"
+            android:hint="@string/password_hint"
+
+            android:inputType="textPassword"
+
+            android:paddingStart="15dp" />
+
+        <LinearLayout
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/editTextPassword2"
+            android:layout_marginTop="23dp"
+            android:hint="@string/confirm_password_hint"
+            android:inputType="textPassword"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editWeight"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cus_edit"
+                android:ems="10"
+                android:hint="@string/Weight"
+                android:inputType="number"
+                android:paddingHorizontal="15dp" />
+
+            <EditText
+                android:id="@+id/editHeight"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/cus_edit"
+                android:ems="10"
+                android:hint="@string/Height"
+                android:inputType="number"
+                android:paddingHorizontal="15dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextEmail2"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/editTextConfirmPassword"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/cus_edit"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            android:paddingStart="15dp" />
+
+        <EditText
+            android:id="@+id/editTextDOB"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/editTextEmail2"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/cus_edit"
+            android:hint="@string/dob_hint"
+            android:paddingStart="15dp" />
+
+        <Spinner
+            android:id="@+id/spinnerExercise"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@+id/editTextDOB"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/cus_edit"
+            android:paddingStart="15dp" />
+
+        <ImageView
+            android:id="@+id/imageViewDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextDOB"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_date_picker" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinnerExercise"
+            android:layout_marginTop="27dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="361dp"
+            android:layout_height="62dp"
+            android:layout_below="@id/radioGroupGender"
+            android:layout_marginTop="16dp"
+            android:text="@string/register_button"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="358dp"
+            android:layout_height="51dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/register"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textColorHighlight="#E91E63"
+            android:textColorHint="@color/primary"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="364dp"
+            android:layout_height="46dp"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="10dp"
+            android:text="@string/regis_subtext"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

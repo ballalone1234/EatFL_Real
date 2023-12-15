@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_array">
+        <item>ไม่ออกกําลังกาย</item>
+        <item>ออกกําลังกาย 1-2 วันต่อสัปดาห</item>
+        <item>ออกกําลังกาย 3-5 วันต่อสัปดาห</item>
+        <item>ออกกําลังกาย 6-7 วันต่อสัปดาห</item>
+        <item>นักกีฬาอาชีพ</item>
+    </string-array>
+    <string name="app_name">กินเพื่ออยู่</string>
+    <string name="hello_blank_fragment">เทส</string>
+    <string name="hello_home_fragment">เทส</string>
+    <string name="username_hint">ชื่อผู้ใช้</string>
+    <string name="password_hint">รหัสผ่าน</string>
+    <string name="login_button">เข้าสู่ระบบ</string>
+    <string name="prompt_email">อีเมล</string>
+    <string name="prompt_password">รหัสผ่าน</string>
+    <string name="action_sign_in">เข้าสู่ระบบ หรือ สร้างบัญชี</string>
+    <string name="action_sign_in_short">สร้างบัญชี</string>
+    <string name="welcome">ยินดีต้อนรับ</string>
+    <string name="invalid_username">ชื่อผู้ใช้ไม่ถูกต้อง</string>
+    <string name="invalid_password">รหัสผ่านต้องมากกว่า 5 ตัว</string>
+    <string name="login_failed">เข้าสู่ระบบล้มเหลว</string>
+    <string name="confirm_password_hint">ยืนยันรหัสผ่าน</string>
+    <string name="email_hint">อีเมล</string>
+    <string name="dob_hint">วันเกิด</string>
+    <string name="register_button">สร้างบัญชี</string>
+    <string name="register">สร้างบัญชี</string>
+    <string name="login">เข้าสู่ระบบ</string>
+    <string name="regis_subtext">register for the best exprerience.</string>
+    <string name="headertext">Calorie to day</string>
+    <string name="calShow">2020</string>
+    <string name="Weight" />
+    <string name="Height">Height</string>
+    <string name="save_money">จัดการงบ</string>
+    <string name="loss_weight">ควบคุมน้ำหนัก</string>
+    <string name="my_plan">แผนของฉัน</string>
+    <string name="Feed">โพสต์</string>
+</resources>

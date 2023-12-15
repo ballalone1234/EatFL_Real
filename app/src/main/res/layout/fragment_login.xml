@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="30dp">
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageViewLogo"
+            android:layout_marginBottom="-71dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/login_button"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_below="@id/imageViewLogo"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/cus_edit"
+            android:hint="@string/username_hint"
+            android:paddingVertical="10dp"
+            android:paddingStart="15dp" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/editTextUsername"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/cus_edit"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:paddingStart="15dp" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="355dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/editTextPassword"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/login_button"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextPassword"
+            android:layout_marginTop="78dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/register_button"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+
+</FrameLayout>
