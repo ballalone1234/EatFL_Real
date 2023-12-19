@@ -22,9 +22,13 @@ public class AppControl extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().hide();
     }
     void show_actionbar(String title){
+
+
+
         ((MainActivity) getActivity()).getSupportActionBar().show();
         //change title
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("จัดการงบ");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(title);
+
         //change back button
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //change background color

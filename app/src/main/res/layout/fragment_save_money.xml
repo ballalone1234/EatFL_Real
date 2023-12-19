@@ -1,17 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".save_money">
 
-    <GridView
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
-        android:horizontalSpacing="20dp"
-        android:verticalSpacing="10dp"
-        android:id="@+id/grid_view"/>
+        android:paddingHorizontal="30dp">
+
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="25dp"
+            android:horizontalSpacing="20dp"
+            android:numColumns="2"
+            android:verticalSpacing="10dp" />
+
+        <EditText
+            android:id="@+id/edit_money"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/cus_edit"
+
+            android:hint="@string/money"
+
+            android:inputType="textPassword"
+            android:paddingStart="15dp" />
+
+        <LinearLayout
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="378dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/edit_money"
+            android:layout_marginTop="23dp"
+            android:hint="@string/confirm_password_hint"
+            android:inputType="textPassword"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_time"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cus_edit"
+                android:ems="10"
+                android:hint="@string/time"
+                android:inputType="number"
+                android:paddingHorizontal="15dp" />
+
+            <Spinner
+                android:id="@+id/spinner_type"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/cus_edit"
+                android:paddingHorizontal="15dp" />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextConfirmPassword"
+            android:layout_marginTop="47dp"
+            android:text="@string/recom_food"
+            android:textColor="#E91E63"
+            android:textFontWeight="@integer/material_motion_duration_medium_2" />
+
+    </RelativeLayout>
+
 </FrameLayout>
 
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/login">
+    app:startDestination="@id/save_money">
     <fragment
         android:id="@+id/login"
         android:name="com.example.eatfl.Login"
@@ -41,6 +41,15 @@
         android:id="@+id/save_money"
         android:name="com.example.eatfl.save_money"
         android:label="fragment_save_money"
-        tools:layout="@layout/fragment_save_money" />
+        tools:layout="@layout/fragment_save_money" >
+        <action
+            android:id="@+id/action_save_money_to_detail_item"
+            app:destination="@id/detail_item" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_item"
+        android:name="com.example.eatfl.detail_item"
+        android:label="fragment_detail_item"
+        tools:layout="@layout/fragment_detail_item" />
 
 </navigation>

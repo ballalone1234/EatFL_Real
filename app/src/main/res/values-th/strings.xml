@@ -7,6 +7,11 @@
         <item>ออกกําลังกาย 6-7 วันต่อสัปดาห</item>
         <item>นักกีฬาอาชีพ</item>
     </string-array>
+    <string-array name="type_time_array">
+        <item>วัน</item>
+        <item>สัปดาห์</item>
+        <item>เดือน</item>
+    </string-array>
     <string name="app_name">กินเพื่ออยู่</string>
     <string name="hello_blank_fragment">เทส</string>
     <string name="hello_home_fragment">เทส</string>
@@ -36,4 +41,9 @@
     <string name="loss_weight">ควบคุมน้ำหนัก</string>
     <string name="my_plan">แผนของฉัน</string>
     <string name="Feed">โพสต์</string>
+    <string name="money">งบประมาณ</string>
+    <string name="recom_food">อาหารแนะนำ</string>
+    <string name="time">ระยะเวลา</string>
+    <string name="เพิ่มในแผน" />
+    <string name="add_to_plan">เพิ่มในแผน</string>
 </resources>
