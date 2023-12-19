@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,22 +71,46 @@ public class detail_item extends AppControl {
         show_actionbar("รายละเอียด");
         Bundle bundle = getArguments();
         String name = bundle.getString("name");
-        String price = bundle.getString("price");
+        Double price = bundle.getDouble("price");
         String detail = bundle.getString("description");
         String image = bundle.getString("image");
         String part = bundle.getString("part");
+        String location = bundle.getString("location");
         ImageView imageView = view.findViewById(R.id.item_image);
         TextView textView = view.findViewById(R.id.title);
         TextView textView1 = view.findViewById(R.id.subtitle);
         TextView textView3 = view.findViewById(R.id.price);
         TextView textView2 = view.findViewById(R.id.detail);
+        TextView textView4 = view.findViewById(R.id.namelo);
+        TextView textView5 = view.findViewById(R.id.item_distance);
+
+
+        getDistance(new OnDistanceReceivedListener() {
+            @Override
+            public void onDistanceReceived(String distance, String destination_addresses) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String destination_addresses2 = destination_addresses;
+                        // limit String length
+                        if (destination_addresses2.length() > 20) {
+                            destination_addresses2 = destination_addresses.substring(0, 20) + "...";
+                        }
+                        textView4.setText(destination_addresses2);
+                        textView5.setText(distance);
+                    }
+                });
+            }
+        }, location);
         textView.setText(name);
         textView1.setText(part);
-        textView3.setText(price);
+        textView3.setText(price.toString());
         textView2.setText(detail);
         Glide.with(getContext()).load(image).into(imageView);
         // you can use findViewById() here
         super.onViewCreated(view, savedInstanceState);
         // you can use findViewById() here
     }
+
+
 }

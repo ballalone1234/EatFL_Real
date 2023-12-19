@@ -2,12 +2,16 @@ package com.example.eatfl;
 
 import android.os.Bundle;
 
+import java.util.HashMap;
+import java.util.concurrent.Executors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,15 @@ import android.widget.Spinner;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +93,9 @@ public class save_money extends AppControl {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         bottom_navbar_hide();
+
+
+        List<Item> itemsList3 = new ArrayList<>();
         Spinner spinner =	view.findViewById(R.id.spinner_type);
 //	Create	an	ArrayAdapter using	 the	string	array	and	a	default	spinner	 layout
         ArrayAdapter<CharSequence> adapter =	ArrayAdapter.createFromResource(requireContext(),
@@ -92,44 +108,58 @@ public class save_money extends AppControl {
         //show action bar
         show_actionbar("จัดการงบ");
 
-        List<String> nameList = new ArrayList<>();
-        List<String> descriptionList = new ArrayList<>();
-        List<String> priceList = new ArrayList<>();
-        List<String> imageList = new ArrayList<>();
-        List<String> partList = new ArrayList<>();
-        //get data in firestore
+        // Create a HashMap to store items with their names as keys and prices as values
+        HashMap<String, Item> itemsMap = new HashMap<>();
+
+        
         db.collection("items").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-
                 for(QueryDocumentSnapshot document : task.getResult()){
-                    nameList.add(document.getString("item_name"));
-                    descriptionList.add(document.getString("item_des"));
-                    priceList.add(document.getString("item_price"));
-                    imageList.add(document.getString("item_url"));
-                    partList.add(document.getString("item_part"));
+                    String name = document.getString("item_name");
+                    String description = document.getString("item_des");
+                    Double price = document.getDouble("item_price");
+                    String image = document.getString("item_url");
+                    String part = document.getString("item_part");
+                    String location = document.getString("item_location");
+
+                    // If the item already exists in the map and its price is higher, skip this iteration
+                    if (itemsMap.containsKey(name) && itemsMap.get(name).getPrice() <= price) {
+                        continue;
+                    }
+
+                    // Create a new Item object and put it in the map
+                    Item item = new Item(name, description, price, image, part ,location);
+                    itemsMap.put(name, item);
                 }
 
+                // Convert the values of the HashMap to a list
+                List<Item> itemsList = new ArrayList<>(itemsMap.values());
+                itemsList3.addAll(itemsList);
+                // Now you can use your GridAdapter with the filtered list
                 GridView gridView = view.findViewById(R.id.grid_view);
-                GridAdapter gridAdapter = new GridAdapter(getContext(),nameList,descriptionList,priceList,imageList);
+                GridAdapter gridAdapter = new GridAdapter(getContext(), itemsList);
                 gridView.setAdapter(gridAdapter);
             }
         });
         //end get data in firestore
         //when click item in gridview send data to fragment
-        GridView gridView = view.findViewById(R.id.grid_view);
-        gridView.setOnItemClickListener((parent, view1, position, id) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("name",nameList.get(position));
-            bundle.putString("description",descriptionList.get(position));
-            bundle.putString("price",priceList.get(position));
-            bundle.putString("image",imageList.get(position));
-            bundle.putString("part",partList.get(position));
-            NavHostFragment.findNavController(save_money.this)
-                    .navigate(R.id.action_save_money_to_detail_item, bundle);
-        });
+      GridView gridView = view.findViewById(R.id.grid_view);
+gridView.setOnItemClickListener((parent, view1, position, id) -> {
+    Item item = itemsList3.get(position);
+    Bundle bundle = new Bundle();
+    bundle.putString("name", item.getName());
+    bundle.putString("description", item.getDescription());
+    bundle.putDouble("price", item.getPrice());
+    bundle.putString("image", item.getImage());
+    bundle.putString("part", item.getPart());
+    bundle.putString("location", item.getLocation());
+    NavHostFragment.findNavController(save_money.this)
+            .navigate(R.id.action_save_money_to_detail_item, bundle);
+});
         //end when click item in gridview send data to fragment
-
-
         super.onViewCreated(view, savedInstanceState);
     }
+
+
+
 }

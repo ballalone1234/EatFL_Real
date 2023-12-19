@@ -14,22 +14,18 @@ import java.util.List;
 
 public class GridAdapter extends BaseAdapter {
     Context context;
-    List<String> name;
-    List<String> description;
-    List<String> price;
-    List<String> image;
+    List<Item> items;
     LayoutInflater inflater;
 
-    public GridAdapter(Context context, List<String> name, List<String> description, List<String> price, List<String> image) {
+    public GridAdapter(Context context, List<Item> items) {
         this.context = context;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.image = image;
+        this.items = items;
     }
+
+
     @Override
     public int getCount() {
-        return name.size();
+        return items.size();
     }
 
     @Override
@@ -51,15 +47,16 @@ public class GridAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.itew_grid,null);
         }
 
-        ImageView imageView=convertView.findViewById(R.id.item_image);
-        Glide.with(context).load(image.get(position)).into(imageView);
-        TextView textView=convertView.findViewById(R.id.item_name);
-        textView.setText(name.get(position));
-        TextView textView1=convertView.findViewById(R.id.item_des);
-        textView1.setText(description.get(position));
-        TextView textView2=convertView.findViewById(R.id.item_price);
-        textView2.setText(price.get(position));
+        Item item = items.get(position);
 
+        ImageView imageView=convertView.findViewById(R.id.item_image);
+        Glide.with(context).load(item.getImage()).into(imageView);
+        TextView textView=convertView.findViewById(R.id.item_name);
+        TextView textView1=convertView.findViewById(R.id.item_des);
+        TextView textView2=convertView.findViewById(R.id.item_price);
+        textView.setText(item.getName());
+        textView1.setText(item.getDescription());
+        textView2.setText(item.getPrice().toString());
         return convertView;
     }
 }
