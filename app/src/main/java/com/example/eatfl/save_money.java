@@ -153,6 +153,7 @@ gridView.setOnItemClickListener((parent, view1, position, id) -> {
     bundle.putString("image", item.getImage());
     bundle.putString("part", item.getPart());
     bundle.putString("location", item.getLocation());
+
     NavHostFragment.findNavController(save_money.this)
             .navigate(R.id.action_save_money_to_detail_item, bundle);
 });

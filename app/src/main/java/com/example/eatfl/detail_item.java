@@ -3,6 +3,7 @@ package com.example.eatfl;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,6 +86,7 @@ public class detail_item extends AppControl {
         TextView textView5 = view.findViewById(R.id.item_distance);
 
 
+
         getDistance(new OnDistanceReceivedListener() {
             @Override
             public void onDistanceReceived(String distance, String destination_addresses) {
@@ -106,6 +108,13 @@ public class detail_item extends AppControl {
         textView1.setText(part);
         textView3.setText(price.toString());
         textView2.setText(detail);
+        textView4.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("name", name);
+            bundle1.putString("part", part);
+            NavHostFragment.findNavController(detail_item.this)
+                    .navigate(R.id.action_detail_item_to_place_view, bundle);
+        });
         Glide.with(getContext()).load(image).into(imageView);
         // you can use findViewById() here
         super.onViewCreated(view, savedInstanceState);

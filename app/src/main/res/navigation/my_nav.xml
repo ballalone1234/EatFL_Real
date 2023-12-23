@@ -50,6 +50,15 @@
         android:id="@+id/detail_item"
         android:name="com.example.eatfl.detail_item"
         android:label="fragment_detail_item"
-        tools:layout="@layout/fragment_detail_item" />
+        tools:layout="@layout/fragment_detail_item" >
+        <action
+            android:id="@+id/action_detail_item_to_place_view"
+            app:destination="@id/place_view" />
+    </fragment>
+    <fragment
+        android:id="@+id/place_view"
+        android:name="com.example.eatfl.place_view"
+        android:label="fragment_place_view"
+        tools:layout="@layout/fragment_place_view" />
 
 </navigation>

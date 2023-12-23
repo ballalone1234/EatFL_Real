@@ -52,38 +52,108 @@ public class AppControl extends Fragment {
     public interface OnDistanceReceivedListener {
         void onDistanceReceived(String distance, String destination_addresses);
     }
-    public void getDistance(OnDistanceReceivedListener listener , String des) {
-    Executors.newSingleThreadExecutor().execute(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                String origin = getCurrentLocation();
-                String destination = des;
-                String urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin + "&destinations=" + destination + "&key=" + apiKey;
-                URL url = new URL(urlString);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                String line, outputString = "";
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line = reader.readLine()) != null) {
-                    outputString += line;
+    public void getDistance(OnDistanceReceivedListener listener , String placeId) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String origin = getCurrentLocation();
+                    String destination = placeId;
+                    String urlString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin + "&destinations=" + destination + "&key=" + apiKey;
+                    URL url = new URL(urlString);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    String line, outputString = "";
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = reader.readLine()) != null) {
+                        outputString += line;
+                    }
+                    JSONObject jsonResponse = new JSONObject(outputString);
+                    Log.i("ระยะทาง", outputString);
+                    String distance = jsonResponse.getJSONArray("rows")
+                            .getJSONObject(0)
+                            .getJSONArray("elements")
+                            .getJSONObject(0)
+                            .getJSONObject("distance")
+                            .getString("text");
+
+                    Log.w("ระยะทาง", distance);
+
+                    getPlaceName(new OnPlaceNameReceivedListener() {
+                        @Override
+                        public void onPlaceNameReceived(String placeName) {
+                            listener.onDistanceReceived(distance, placeName);}
+                    }, placeId);
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
                 }
-                JSONObject jsonResponse = new JSONObject(outputString);
-                String destination_addresses = jsonResponse.getJSONArray("destination_addresses").getString(0);
-                String distance = jsonResponse.getJSONArray("rows")
-                        .getJSONObject(0)
-                        .getJSONArray("elements")
-                        .getJSONObject(0)
-                        .getJSONObject("distance")
-                        .getString("text");
-                Log.w("ระยะทาง", distance);
-                listener.onDistanceReceived(distance, destination_addresses);
-            } catch (IOException | JSONException e) {
-                throw new RuntimeException(e);
             }
-        }
-    });
-}
+        });
+    }
+    public void getPlaceName(OnPlaceNameReceivedListener listener , String des) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String urlString = "https://maps.googleapis.com/maps/api/geocode/json?address=" + des + "&key=" + apiKey;
+                   Log.w("urlString",urlString);
+                    URL url = new URL(urlString);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    String line, outputString = "";
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = reader.readLine()) != null) {
+                        outputString += line;
+                    }
+                    JSONObject jsonResponse = new JSONObject(outputString);
+                    Log.i("ตำแหน่ง", outputString);
+                    String place_id = jsonResponse.getJSONArray("results")
+                            .getJSONObject(0)
+                            .getString("place_id");
+                    getPlaceDetails(new OnPlaceDetailsReceivedListener() {
+                        @Override
+                        public void onPlaceDetailsReceived(String placeName) {
+                            listener.onPlaceNameReceived(placeName);}
+                    }, place_id);
+//                    listener.onPlaceNameReceived(place_id);
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public interface OnPlaceNameReceivedListener {
+        void onPlaceNameReceived(String placeName);
+    }
+    public interface OnPlaceDetailsReceivedListener {
+        void onPlaceDetailsReceived(String placeName);
+    }
+
+    public void getPlaceDetails(OnPlaceDetailsReceivedListener listener, String placeId) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String urlString = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=" + apiKey;
+                    URL url = new URL(urlString);
+                    Log.w("urlString2",urlString);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    String line, outputString = "";
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = reader.readLine()) != null) {
+                        outputString += line;
+                    }
+                    JSONObject jsonResponse = new JSONObject(outputString);
+                    String placeName = jsonResponse.getJSONObject("result").getString("name");
+                    listener.onPlaceDetailsReceived(placeName);
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
     public String getCurrentLocation() {
         current_location = "";
         try {
