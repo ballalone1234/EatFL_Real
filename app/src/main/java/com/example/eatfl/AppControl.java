@@ -186,7 +186,7 @@ public class AppControl extends Fragment {
     }
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    protected void appPlanToFireStore(String planName, String planDetail, String planPrice, String planLocation, String planImage) {
+    protected void addPlanToFireStore(String planName, String planDetail, String planPrice, String planLocation, String planImage) {
         //add to collection plan in collection users in document user id
         db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("plan").document(planName)
                 .set(new Plan(planName, planDetail, planPrice, planLocation, Timestamp.now()))
