@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
@@ -182,4 +184,26 @@ public class AppControl extends Fragment {
 
 
     }
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    protected void appPlanToFireStore(String planName, String planDetail, String planPrice, String planLocation, String planImage) {
+        //add to collection plan in collection users in document user id
+        db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("plan").document(planName)
+                .set(new Plan(planName, planDetail, planPrice, planLocation, Timestamp.now()))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("add plan", "DocumentSnapshot successfully written!");
+                    //add to collection plan in collection users in document user id
+                    db.collection("plan").document(planName)
+                            .set(new Plan(planName, planDetail, planPrice, planLocation, Timestamp.now()))
+                            .addOnSuccessListener(aVoid1 -> {
+                                Log.d("add plan", "DocumentSnapshot successfully written!");
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.w("add plan", "Error writing document", e);
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("add plan", "Error writing document", e);
+                });}
+
 }

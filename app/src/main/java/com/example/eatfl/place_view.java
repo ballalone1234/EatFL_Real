@@ -7,6 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.SavedStateHandle;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
@@ -147,8 +150,21 @@ public class place_view extends AppControl {
             bundle2.putString("distance", distance.getText().toString());
             bundle2.putString("price", price.getText().toString());
             //when click item in gridview send data to previous fragment
-               NavHostFragment.findNavController(place_view.this).popBackStack();
+            NavController navController = NavHostFragment.findNavController(place_view.this);
+            NavBackStackEntry previousBackStackEntry = navController.getPreviousBackStackEntry();
 
+            if (previousBackStackEntry != null) {
+                SavedStateHandle savedStateHandle = previousBackStackEntry.getSavedStateHandle();
+
+                if (savedStateHandle != null) {
+                    savedStateHandle.set("back", bundle2);
+                    navController.popBackStack();
+                } else {
+                    Log.e("NavigationError", "SavedStateHandle is null");
+                }
+            } else {
+                Log.e("NavigationError", "No previous back stack entry found");
+            }
         });
         super.onViewCreated(view, savedInstanceState);
     }

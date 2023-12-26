@@ -85,41 +85,65 @@ public class detail_item extends AppControl {
         TextView textView4 = view.findViewById(R.id.namelo);
         TextView textView5 = view.findViewById(R.id.item_distance);
 
-
-
-        getDistance(new OnDistanceReceivedListener() {
-            @Override
-            public void onDistanceReceived(String distance, String destination_addresses) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String destination_addresses2 = destination_addresses;
-                        // limit String length
-                        if (destination_addresses2.length() > 20) {
-                            destination_addresses2 = destination_addresses.substring(0, 20) + "...";
-                        }
-                        textView4.setText(destination_addresses2);
-                        textView5.setText(distance);
-                    }
-                });
-            }
-        }, location);
         textView.setText(name);
         textView1.setText(part);
         textView3.setText(price.toString());
         textView2.setText(detail);
+        Bundle receivedBundle = NavHostFragment.findNavController(this).getCurrentBackStackEntry().getSavedStateHandle().get("back");
+        if (receivedBundle != null)
+        {
+            String name1 = receivedBundle.getString("name");
+            String distance = receivedBundle.getString("distance");
+            String price1 = receivedBundle.getString("price");
+
+            // Now you can use these values in your fragment
+            // For example, let's log them
+            assert price1 != null;
+            float f = Float.valueOf(price1.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+            Log.i("ReceivedData", "Name: " + name1 + ", Distance: " + distance + ", Price: " + f);
+                textView4.setText(name1);
+                textView5.setText(distance);
+                textView3.setText(String.valueOf(f));
+
+
+
+        }else {
+            getDistance(new OnDistanceReceivedListener() {
+                @Override
+                public void onDistanceReceived(String distance, String destination_addresses) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String destination_addresses2 = destination_addresses;
+                            // limit String length
+                            if (destination_addresses2.length() > 20) {
+                                destination_addresses2 = destination_addresses.substring(0, 20) + "...";
+                            }
+                            textView4.setText(destination_addresses2);
+                            textView5.setText(distance);
+                        }
+                    });
+                }
+            }, location);
+
+        }
+
         textView4.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             bundle1.putString("name", name);
             bundle1.putString("part", part);
-            NavHostFragment.findNavController(detail_item.this)
+
+            NavHostFragment.findNavController(this)
                     .navigate(R.id.action_detail_item_to_place_view, bundle);
         });
         Glide.with(getContext()).load(image).into(imageView);
+
         // you can use findViewById() here
         super.onViewCreated(view, savedInstanceState);
         // you can use findViewById() here
     }
+
+
 
 
 }
