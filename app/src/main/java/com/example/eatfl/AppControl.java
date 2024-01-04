@@ -186,6 +186,8 @@ public class AppControl extends Fragment {
     }
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
     protected void addPlanToFireStore(String planName, String planDetail, String planPrice, String planLocation, String planImage) {
         //add to collection plan in collection users in document user id
         db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("plan").document(planName)
@@ -205,5 +207,27 @@ public class AppControl extends Fragment {
                 .addOnFailureListener(e -> {
                     Log.w("add plan", "Error writing document", e);
                 });}
+
+    protected void getDataRecipeFormApi(String ingradient){
+        try {
+            String urlString = "https://api.edamam.com/api/nutrition-data?app_id=ff0a1a66&app_key=b0e097ef32571b07bf395fecdef4f62a&nutrition-type=cooking&ingr=" + ingradient ;
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            String line, outputString = "";
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = reader.readLine()) != null) {
+                outputString += line;
+            }
+            JSONObject jsonResponse = new JSONObject(outputString);
+            int calories = jsonResponse.getInt("calories");
+            double protein = jsonResponse.getJSONObject("totalNutrients").getJSONObject("PROCNT").getDouble("quantity");
+            System.out.println("Calories: " + calories);
+            System.out.println("Protein: " + protein);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

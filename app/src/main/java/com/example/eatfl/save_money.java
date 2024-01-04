@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
 
@@ -46,6 +47,7 @@ public class save_money extends AppControl {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    Button saveBtn;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -94,7 +96,10 @@ public class save_money extends AppControl {
 
         bottom_navbar_hide();
 
+        saveBtn = view.findViewById(R.id.saveB);
+        saveBtn.setOnClickListener(v -> {
 
+        });
         List<Item> itemsList3 = new ArrayList<>();
         Spinner spinner =	view.findViewById(R.id.spinner_type);
 //	Create	an	ArrayAdapter using	 the	string	array	and	a	default	spinner	 layout
@@ -139,6 +144,9 @@ public class save_money extends AppControl {
                 GridView gridView = view.findViewById(R.id.grid_view);
                 GridAdapter gridAdapter = new GridAdapter(getContext(), itemsList);
                 gridView.setAdapter(gridAdapter);
+            }
+            else {
+                Log.d("ERROR", "Error getting documents: ", task.getException());
             }
         });
         //end get data in firestore
