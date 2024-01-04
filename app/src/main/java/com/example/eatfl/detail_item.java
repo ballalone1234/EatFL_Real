@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class detail_item extends AppControl {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    Button saveBtn;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -127,7 +129,10 @@ public class detail_item extends AppControl {
             }, location);
 
         }
+        saveBtn = view.findViewById(R.id.saveB);
+        saveBtn.setOnClickListener(v -> {
 
+        });
         textView4.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             bundle1.putString("name", name);
