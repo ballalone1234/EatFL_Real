@@ -9,11 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.Timestamp;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +76,15 @@ public class detail_item extends AppControl {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         show_actionbar("รายละเอียด");
+        Spinner spinner =	view.findViewById(R.id.spinner_ex);
+//	Create	an	ArrayAdapter using	 the	string	array	and	a	default	spinner	 layout
+        ArrayAdapter<CharSequence> adapter =	ArrayAdapter.createFromResource(requireContext(),
+                R.array.type_item_array,	android.R.layout.simple_spinner_item);
+//	Specify	 the	layout	to	use	when	the	list	of	choices	 appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+//	Apply	 the	adapter	to	the	spinner
+        spinner.setAdapter(adapter);
         Bundle bundle = getArguments();
         String name = bundle.getString("name");
         Double price = bundle.getDouble("price");
@@ -106,8 +119,8 @@ public class detail_item extends AppControl {
                 textView4.setText(name1);
                 textView5.setText(distance);
                 textView3.setText(String.valueOf(f));
-
-
+                price = Double.valueOf(f);
+                location = name1;
 
         }else {
             getDistance(new OnDistanceReceivedListener() {
@@ -123,6 +136,7 @@ public class detail_item extends AppControl {
                             }
                             textView4.setText(destination_addresses2);
                             textView5.setText(distance);
+
                         }
                     });
                 }
@@ -130,7 +144,13 @@ public class detail_item extends AppControl {
 
         }
         saveBtn = view.findViewById(R.id.saveB);
+        Double finalPrice = price;
+        String finalLocation = location;
         saveBtn.setOnClickListener(v -> {
+            Spinner spinner1 = view.findViewById(R.id.spinner_ex);
+            String text = spinner1.getSelectedItem().toString();
+            EditText amountEdit = view.findViewById(R.id.amount);
+            addItemToPlanToCart(new Plan_item(part, finalPrice.toString(), Double.valueOf(amountEdit.getText().toString()), text, finalLocation, Timestamp.now()));
 
         });
         textView4.setOnClickListener(v -> {

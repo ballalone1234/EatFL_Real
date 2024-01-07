@@ -14,6 +14,11 @@
         <item>เดือน</item>
     </string-array>
 
+    <string-array name="type_item_array">
+        <item>g</item>
+        <item>kilogram</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_home_fragment">Hello Home fragment</string>
@@ -50,5 +55,6 @@
     <string name="time">ระยะเวลา</string>
     <string name="เพิ่มในแผน" />
     <string name="add_to_plan">เพิ่มในแผน</string>
+    <string name="amont">ปริมาณ</string>
 
 </resources>

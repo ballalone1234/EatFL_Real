@@ -46,4 +46,5 @@
     <string name="time">ระยะเวลา</string>
     <string name="เพิ่มในแผน" />
     <string name="add_to_plan">เพิ่มในแผน</string>
+    <string name="amont">ปริมาณ</string>
 </resources>

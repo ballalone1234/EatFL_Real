@@ -2,6 +2,7 @@ package com.example.eatfl;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +25,8 @@ public class AppControl extends Fragment {
     String current_location = "Hà Nội";
     String apiKey = "AIzaSyAg73jf1U-e9efFTXy4hiCA_Wef_b0B26I"; // replace with your API key
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
     //Test save git
     public void bottom_navbar_show() {
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
@@ -188,24 +191,33 @@ public class AppControl extends Fragment {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
-    protected void addPlanToFireStore(String planName, String planDetail, String planPrice, String planLocation, String planImage) {
+//    protected void addPlanToFireStore(String planName,String part , Double amount , String planPrice, String location) {
+//        String userId = mAuth.getCurrentUser().getUid();
+//        //add to collection plan in collection users in document user id
+//        db.collection("plans").document(planName)
+//                .set(new Plan(planName, part, amount, planPrice,location, userId, Timestamp.now()))
+//                .addOnSuccessListener(aVoid -> {
+//                    Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
+//                    Log.i("addPlanToFireStore", "เพิ่มแผนสำเร็จ");
+//                })
+//                .addOnFailureListener(e -> {
+//                    Toast.makeText(getContext(), "เพิ่มแผนไม่สำเร็จ", Toast.LENGTH_SHORT).show();
+//                    Log.i("addPlanToFireStore", "เพิ่มแผนไม่สำเร็จ");
+//                });}
+
+
+    protected void addItemToPlanToCart(Plan_item plan_item) {
+        String userId = mAuth.getCurrentUser().getUid();
         //add to collection plan in collection users in document user id
-        db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("plan").document(planName)
-                .set(new Plan(planName, planDetail, planPrice, planLocation, Timestamp.now()))
+        db.collection("users").document(userId).collection("cart").document()
+                .set(plan_item)
                 .addOnSuccessListener(aVoid -> {
-                    Log.d("add plan", "DocumentSnapshot successfully written!");
-                    //add to collection plan in collection users in document user id
-                    db.collection("plan").document(planName)
-                            .set(new Plan(planName, planDetail, planPrice, planLocation, Timestamp.now()))
-                            .addOnSuccessListener(aVoid1 -> {
-                                Log.d("add plan", "DocumentSnapshot successfully written!");
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.w("add plan", "Error writing document", e);
-                            });
+                    Toast.makeText(getContext(), "เพิ่มในแผนสำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มในแผนสำเร็จ");
                 })
                 .addOnFailureListener(e -> {
-                    Log.w("add plan", "Error writing document", e);
+                    Toast.makeText(getContext(), "เพิ่มในแผนไม่สำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มในแผนไม่สำเร็จ");
                 });}
 
     protected void getDataRecipeFormApi(String ingradient){
