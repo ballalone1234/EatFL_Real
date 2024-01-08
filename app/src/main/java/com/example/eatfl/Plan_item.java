@@ -4,14 +4,14 @@ import com.google.firebase.Timestamp;
 
 public class Plan_item {
     private final String part;
-    private final String price;
+    private final Double price;
     private final Double amount;
     private final String location;
     private final Timestamp timestamp;
 
     private final String et;
 
-    public Plan_item(String part, String price, Double amount, String et, String location, Timestamp timestamp) {
+    public Plan_item(String part, Double price, Double amount, String et, String location, Timestamp timestamp) {
         this.part = part;
         this.price = price;
         this.amount = amount;
@@ -24,7 +24,7 @@ public class Plan_item {
         return part;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 

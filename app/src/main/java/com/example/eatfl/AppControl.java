@@ -54,6 +54,7 @@ public class AppControl extends Fragment {
 
     }
 
+
     public interface OnDistanceReceivedListener {
         void onDistanceReceived(String distance, String destination_addresses);
     }

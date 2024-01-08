@@ -1,7 +1,5 @@
 package com.example.eatfl;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,8 +22,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -142,9 +138,9 @@ public class place_view extends AppControl {
         //when click item in gridview send data to fragment
         GridView gridView = view.findViewById(R.id.grid_view_place);
         gridView.setOnItemClickListener((parent, view1, position, id) -> {
-            TextView price = view1.findViewById(R.id.place_price);
-            TextView distance = view1.findViewById(R.id.place_distance);
-            TextView namep = view1.findViewById(R.id.place_name);
+            TextView price = view1.findViewById(R.id.am_ex);
+            TextView distance = view1.findViewById(R.id.item_order_price);
+            TextView namep = view1.findViewById(R.id.item_order_name);
             Bundle bundle2 = new Bundle();
             bundle2.putString("name", namep.getText().toString());
             bundle2.putString("distance", distance.getText().toString());

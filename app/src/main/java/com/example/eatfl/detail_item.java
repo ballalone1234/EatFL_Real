@@ -150,7 +150,7 @@ public class detail_item extends AppControl {
             Spinner spinner1 = view.findViewById(R.id.spinner_ex);
             String text = spinner1.getSelectedItem().toString();
             EditText amountEdit = view.findViewById(R.id.amount);
-            addItemToPlanToCart(new Plan_item(part, finalPrice.toString(), Double.valueOf(amountEdit.getText().toString()), text, finalLocation, Timestamp.now()));
+            addItemToPlanToCart(new Plan_item(part, finalPrice, Double.valueOf(amountEdit.getText().toString()), text, finalLocation, Timestamp.now()));
 
         });
         textView4.setOnClickListener(v -> {

@@ -1,5 +1,6 @@
 package com.example.eatfl;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import java.util.HashMap;
@@ -7,12 +8,17 @@ import java.util.concurrent.Executors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -74,13 +80,34 @@ public class save_money extends AppControl {
         return fragment;
     }
 
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_save_money, menu);
+
+        // Get the MenuItem for the item
+        MenuItem item = menu.findItem(R.id.plan_item);
+
+        // Get the Drawable for the item
+        Drawable icon = item.getIcon();
+
+        // If the icon exists, apply the white tint
+        if (icon != null) {
+            DrawableCompat.setTint(icon, ContextCompat.getColor(getContext(), R.color.white));
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override

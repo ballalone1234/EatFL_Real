@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_save_money_to_detail_item"
             app:destination="@id/detail_item" />
+        <action
+            android:id="@+id/action_save_money_to_planOrder"
+            app:destination="@id/planOrder" />
     </fragment>
     <fragment
         android:id="@+id/detail_item"
@@ -64,5 +67,10 @@
             android:id="@+id/action_place_view_to_detail_item"
             app:destination="@id/detail_item" />
     </fragment>
+    <fragment
+        android:id="@+id/planOrder"
+        android:name="com.example.eatfl.PlanOrder"
+        android:label="fragment_plan_order"
+        tools:layout="@layout/fragment_plan_order" />
 
 </navigation>

@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -50,9 +47,9 @@ public class GridAdapterPlace extends BaseAdapter {
         Place place = places.get(position);
 
 
-        TextView textView=convertView.findViewById(R.id.place_name);
-        TextView textView1=convertView.findViewById(R.id.place_distance);
-        TextView textView2=convertView.findViewById(R.id.place_price);
+        TextView textView=convertView.findViewById(R.id.item_order_name);
+        TextView textView1=convertView.findViewById(R.id.item_order_price);
+        TextView textView2=convertView.findViewById(R.id.am_ex);
 
         textView.setText(place.getName());
         textView1.setText(place.getDistace());
