@@ -1,5 +1,6 @@
 package com.example.eatfl;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.Executors;
@@ -192,19 +195,6 @@ public class AppControl extends Fragment {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
-//    protected void addPlanToFireStore(String planName,String part , Double amount , String planPrice, String location) {
-//        String userId = mAuth.getCurrentUser().getUid();
-//        //add to collection plan in collection users in document user id
-//        db.collection("plans").document(planName)
-//                .set(new Plan(planName, part, amount, planPrice,location, userId, Timestamp.now()))
-//                .addOnSuccessListener(aVoid -> {
-//                    Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
-//                    Log.i("addPlanToFireStore", "เพิ่มแผนสำเร็จ");
-//                })
-//                .addOnFailureListener(e -> {
-//                    Toast.makeText(getContext(), "เพิ่มแผนไม่สำเร็จ", Toast.LENGTH_SHORT).show();
-//                    Log.i("addPlanToFireStore", "เพิ่มแผนไม่สำเร็จ");
-//                });}
 
 
     protected void addItemToPlanToCart(Plan_item plan_item) {
@@ -221,26 +211,100 @@ public class AppControl extends Fragment {
                     Log.i("addPlanToFireStore", "เพิ่มในแผนไม่สำเร็จ");
                 });}
 
-    protected void getDataRecipeFormApi(String ingradient){
-        try {
-            String urlString = "https://api.edamam.com/api/nutrition-data?app_id=ff0a1a66&app_key=b0e097ef32571b07bf395fecdef4f62a&nutrition-type=cooking&ingr=" + ingradient ;
-            URL url = new URL(urlString);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            String line, outputString = "";
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = reader.readLine()) != null) {
-                outputString += line;
-            }
-            JSONObject jsonResponse = new JSONObject(outputString);
-            int calories = jsonResponse.getInt("calories");
-            double protein = jsonResponse.getJSONObject("totalNutrients").getJSONObject("PROCNT").getDouble("quantity");
-            System.out.println("Calories: " + calories);
-            System.out.println("Protein: " + protein);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    protected void addItemToPlan(Plan_item plan_item , String planName) {
+        String userId = mAuth.getCurrentUser().getUid();
+        //add to collection plan in collection users in document user id
+        db.collection("plans").document(planName).collection("cart").document()
+                .set(plan_item)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "เพิ่มในแผนสำเร็จ2", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มในแผนสำเร็จ2");
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "เพิ่มในแผนไม่สำเร็จ2", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มในแผนไม่สำเร็จ2");
+                });}
 
+
+
+    protected void addPlan(PlanTopic planTopic) {
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("plans").document(planTopic.getName())
+                .set(planTopic)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มแผนสำเร็จ");
+                    db.collection("users").document(userId).collection("cart")
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Plan_item item = document.toObject(Plan_item.class);
+                                        addItemToPlan(item, planTopic.getName());
+                                    }
+                                } else {
+                                    Log.d("Error 47", "Error getting documents: ", task.getException());
+                                }
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "เพิ่มแผนไม่สำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("addPlanToFireStore", "เพิ่มแผนไม่สำเร็จ");
+                });
+
+    }
+    public class SendPostRequestAsyncTask extends AsyncTask<String, Void, String> {
+        private PlanOrder planOrder;
+
+        public SendPostRequestAsyncTask(PlanOrder planOrder) {
+            this.planOrder = planOrder;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            String urlString = params[0];
+            String jsonInputString = params[1];
+
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+
+                try(OutputStream os = conn.getOutputStream()) {
+                    byte[] input = jsonInputString.getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }
+
+                // Read the response
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+
+                return response.toString();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            // Handle the response string here
+            System.out.println(response);
+            try {
+                planOrder.displayData(response);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+    }
 
 }

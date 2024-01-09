@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_home2_to_save_money"
             app:destination="@id/save_money" />
+        <action
+            android:id="@+id/action_home2_to_my_plan"
+            app:destination="@id/my_plan" />
     </fragment>
     <fragment
         android:id="@+id/register"
@@ -72,5 +75,10 @@
         android:name="com.example.eatfl.PlanOrder"
         android:label="fragment_plan_order"
         tools:layout="@layout/fragment_plan_order" />
+    <fragment
+        android:id="@+id/my_plan"
+        android:name="com.example.eatfl.my_plan"
+        android:label="fragment_my_plan"
+        tools:layout="@layout/fragment_my_plan" />
 
 </navigation>

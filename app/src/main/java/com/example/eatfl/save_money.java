@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
 
@@ -89,7 +90,18 @@ public class save_money extends AppControl {
 
         // Get the MenuItem for the item
         MenuItem item = menu.findItem(R.id.plan_item);
-
+        item.setOnMenuItemClickListener(menuItem -> {
+            EditText money_all = requireView().findViewById(R.id.edit_money);
+            EditText save_day = requireView().findViewById(R.id.edit_time);
+            Spinner spinner = requireView().findViewById(R.id.spinner_type);
+            Bundle bundle = new Bundle();
+            bundle.putString("money_all", money_all.getText().toString());
+            bundle.putString("save_day", save_day.getText().toString());
+            bundle.putString("type", spinner.getSelectedItem().toString());
+            NavHostFragment.findNavController(save_money.this)
+                    .navigate(R.id.action_save_money_to_planOrder , bundle);
+            return true;
+        });
         // Get the Drawable for the item
         Drawable icon = item.getIcon();
 

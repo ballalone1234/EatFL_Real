@@ -6,63 +6,64 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="398dp"
-        android:layout_height="153dp"
-        android:background="@drawable/cus_edit3">
+        android:layout_width="366dp"
+        android:layout_height="157dp"
+        android:background="@drawable/plan_column">
 
         <TextView
             android:id="@+id/item_order_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:text="TextView"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toEndOf="@+id/item_order_image_view"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/am_ex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="56dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.773"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/am_e"
             app:layout_constraintTop_toBottomOf="@+id/item_order_name" />
 
         <TextView
             android:id="@+id/item_order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="108dp"
             android:text="TextView"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.996"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toEndOf="@+id/am_ex"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/am_e"
-            android:layout_width="106dp"
-            android:layout_height="37dp"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="44dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="Name"
+            android:inputType="number"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="100dp" />
+            app:layout_constraintStart_toEndOf="@+id/item_order_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/item_order_name" />
 
         <ImageView
             android:id="@+id/item_order_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />

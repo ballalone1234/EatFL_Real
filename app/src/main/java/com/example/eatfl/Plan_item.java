@@ -3,20 +3,21 @@ package com.example.eatfl;
 import com.google.firebase.Timestamp;
 
 public class Plan_item {
-    private final String part;
-    private final Double price;
-    private final Double amount;
-    private final String location;
-    private final Timestamp timestamp;
-
-    private final String et;
-
-    public Plan_item(String part, Double price, Double amount, String et, String location, Timestamp timestamp) {
+    private String part;
+    private Double price;
+    private Double amount;
+    private String location;
+    private Timestamp timestamp;
+    private String image;
+    private String et;
+    public Plan_item() {}
+    public Plan_item(String part, Double price, Double amount, String et, String location, String image, Timestamp timestamp) {
         this.part = part;
         this.price = price;
         this.amount = amount;
         this.et = et;
         this.location = location;
+        this.image = image;
         this.timestamp = timestamp;
     }
 
@@ -38,6 +39,15 @@ public class Plan_item {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getRecipe() {
+        String recipe = String.format("%s %s %s",amount.toString(), et, part);
+        return recipe;
     }
 
     public Timestamp getTimestamp() {
