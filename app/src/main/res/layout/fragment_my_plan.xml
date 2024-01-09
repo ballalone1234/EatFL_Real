@@ -7,6 +7,7 @@
     tools:context=".my_plan">
 
     <GridView
+        android:id="@+id/gridViewMyPlan"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:isScrollContainer="true"

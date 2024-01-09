@@ -131,9 +131,14 @@ public class Home extends AppControl {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottom_navbar_show();
         LinearLayout linearLayout = view.findViewById(R.id.bt1);
+        LinearLayout btnMyplan = view.findViewById(R.id.my_plan_btn);
         linearLayout.setOnClickListener(v -> {
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_save_money);
+        });
+        btnMyplan.setOnClickListener(v -> {
+            NavHostFragment.findNavController(Home.this)
+                    .navigate(R.id.action_home2_to_my_plan);
         });
         super.onViewCreated(view, savedInstanceState);
     }

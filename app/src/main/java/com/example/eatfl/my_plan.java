@@ -4,16 +4,23 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link my_plan#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class my_plan extends Fragment {
+public class my_plan extends AppControl {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +66,19 @@ public class my_plan extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("plans").whereEqualTo("owner" , userId).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            List<My_plan_model> plans = queryDocumentSnapshots.toObjects(My_plan_model.class);
+                    plans.forEach(plan -> {
+                        Log.d("plan", plan.getCal_to_day().toString());
+                    });
+            GridAdapterMyplan adapter = new GridAdapterMyplan(getContext(),plans);
+            GridView grid = getView().findViewById(R.id.gridViewMyPlan);
+            grid.setAdapter(adapter);
+        }
+        );
         return inflater.inflate(R.layout.fragment_my_plan, container, false);
     }
+
+
 }
