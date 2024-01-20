@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.Model;
 
 import java.util.ArrayList;
 

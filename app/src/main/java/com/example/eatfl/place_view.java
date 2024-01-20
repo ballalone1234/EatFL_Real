@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.eatfl.Gridview.GridAdapterPlace;
+import com.example.eatfl.Model.Place;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;

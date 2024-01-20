@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.example.eatfl.Gridview.GridAdapterMyplan;
+import com.example.eatfl.Model.My_plan_model;
 
 import java.util.List;
 

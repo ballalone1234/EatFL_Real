@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.Model;
 
 public class My_plan_model {
     private String name;

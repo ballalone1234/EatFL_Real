@@ -3,7 +3,6 @@ package com.example.eatfl;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +13,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.eatfl.Gridview.GridAdapterOrder;
+import com.example.eatfl.Model.InlineModel;
+import com.example.eatfl.Model.PlanTopic;
+import com.example.eatfl.Model.Plan_item;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
@@ -21,7 +24,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

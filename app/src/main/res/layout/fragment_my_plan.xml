@@ -7,12 +7,17 @@
     tools:context=".my_plan">
 
     <GridView
+        android:padding="10dp"
         android:id="@+id/gridViewMyPlan"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="414dp"
+        android:layout_height="728dp"
+        android:horizontalSpacing="20dp"
         android:isScrollContainer="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:verticalSpacing="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
 </androidx.constraintlayout.widget.ConstraintLayout>

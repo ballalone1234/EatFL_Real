@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.Gridview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.eatfl.Model.Item;
+import com.example.eatfl.R;
 
 import java.util.List;
 

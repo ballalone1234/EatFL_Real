@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.eatfl.Model.Plan_item;
 import com.google.firebase.Timestamp;
 
 /**
