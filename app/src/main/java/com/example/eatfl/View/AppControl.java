@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.eatfl.Model.PlanTopic;
 import com.example.eatfl.Model.Plan_item;
+import com.example.eatfl.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,7 +30,7 @@ import java.util.concurrent.Executors;
 public class AppControl extends Fragment {
     String current_location = "Hà Nội";
     String apiKey = "AIzaSyAg73jf1U-e9efFTXy4hiCA_Wef_b0B26I"; // replace with your API key
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     //Test save git
@@ -230,7 +232,7 @@ public class AppControl extends Fragment {
 
     protected void addPlan(PlanTopic planTopic) {
         String userId = mAuth.getCurrentUser().getUid();
-        db.collection("plans").document(planTopic.getName())
+        db.collection("plans").document()
                 .set(planTopic)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
@@ -307,5 +309,14 @@ public class AppControl extends Fragment {
 
 
     }
+
+        protected void LogOut() {
+        FirebaseAuth.getInstance().signOut();
+        //go to login page
+        NavHostFragment.findNavController(AppControl.this)
+                .navigate(R.id.action_global_login);
+        }
+
+
 
 }

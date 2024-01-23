@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.PlanOrder">
+    tools:context=".View.show_detail_my_plan">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -196,12 +196,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/savePlanBTN"
+        android:id="@+id/sharePlanBTN"
         android:layout_width="122dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
-        android:text="บันทึกแผน"
+        android:text="แบ่งปันแผน"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toEndOf="@+id/editTextText"

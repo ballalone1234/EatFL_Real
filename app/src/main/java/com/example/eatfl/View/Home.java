@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import static android.content.ContentValues.TAG;
 
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.eatfl.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -132,6 +133,8 @@ public class Home extends AppControl {
         bottom_navbar_show();
         LinearLayout linearLayout = view.findViewById(R.id.bt1);
         LinearLayout btnMyplan = view.findViewById(R.id.my_plan_btn);
+        LinearLayout lose_weight = view.findViewById(R.id.loss_weight_btn);
+        LinearLayout feed = view.findViewById(R.id.feed_btn);
         linearLayout.setOnClickListener(v -> {
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_save_money);
@@ -139,6 +142,13 @@ public class Home extends AppControl {
         btnMyplan.setOnClickListener(v -> {
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_my_plan);
+        });
+        feed.setOnClickListener(v -> {
+            NavHostFragment.findNavController(Home.this)
+                    .navigate(R.id.action_home2_to_public_plan);
+        });
+        lose_weight.setOnClickListener(v -> {
+            LogOut();
         });
         super.onViewCreated(view, savedInstanceState);
     }

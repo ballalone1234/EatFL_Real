@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.Bundle;
 
@@ -11,16 +11,21 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.eatfl.Gridview.GridAdapterMyplan;
+import com.example.eatfl.Gridview.GridAdapterPublicPlan;
 import com.example.eatfl.Model.My_plan_model;
+import com.example.eatfl.Model.Public_plan_model;
+import com.example.eatfl.R;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link my_plan#newInstance} factory method to
+ * Use the {@link Public_plan#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class my_plan extends AppControl {
+public class Public_plan extends AppControl {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +36,7 @@ public class my_plan extends AppControl {
     private String mParam1;
     private String mParam2;
 
-    public my_plan() {
+    public Public_plan() {
         // Required empty public constructor
     }
 
@@ -41,11 +46,11 @@ public class my_plan extends AppControl {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment my_plan.
+     * @return A new instance of fragment public_plan.
      */
     // TODO: Rename and change types and number of parameters
-    public static my_plan newInstance(String param1, String param2) {
-        my_plan fragment = new my_plan();
+    public static Public_plan newInstance(String param1, String param2) {
+        Public_plan fragment = new Public_plan();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,23 +67,24 @@ public class my_plan extends AppControl {
         }
     }
 
+    List<Public_plan_model> plans;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         String userId = mAuth.getCurrentUser().getUid();
-        db.collection("plans").whereEqualTo("owner" , userId).get().addOnSuccessListener(queryDocumentSnapshots -> {
-            List<My_plan_model> plans = queryDocumentSnapshots.toObjects(My_plan_model.class);
+        db.collection("plans").whereEqualTo("permission" , "public").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    plans = queryDocumentSnapshots.toObjects(Public_plan_model.class);
+                    //add doc_id to plan
                     plans.forEach(plan -> {
-                        Log.d("plan", plan.getCal_to_day().toString());
+                        plan.setDoc_id(queryDocumentSnapshots.getDocuments().get(plans.indexOf(plan)).getId());
+                        Log.d("plan", plan.getDoc_id());
                     });
-            GridAdapterMyplan adapter = new GridAdapterMyplan(getContext(),plans);
-            GridView grid = getView().findViewById(R.id.gridViewMyPlan);
-            grid.setAdapter(adapter);
-        }
+                    GridAdapterPublicPlan adapter = new GridAdapterPublicPlan(getContext(),plans);
+                    GridView grid = getView().findViewById(R.id.gridViewPublicPlan);
+                    grid.setAdapter(adapter);
+                }
         );
-        return inflater.inflate(R.layout.fragment_my_plan, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_public_plan, container, false);
     }
-
-
 }

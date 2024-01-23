@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.Bundle;
 
@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.eatfl.Gridview.GridAdapterPlace;
 import com.example.eatfl.Model.Place;
+import com.example.eatfl.R;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;

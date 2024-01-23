@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eatfl.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -131,6 +132,13 @@ public class Login extends AppControl {
         TextView password = view.findViewById(R.id.editTextPassword);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        if(keepLogin()){
+            Bundle bundle = new Bundle();
+            NavHostFragment.findNavController(Login.this)
+                    .navigate(R.id.action_login_to_home2, bundle);
+        }
+
         // onclick listener for the textView
         button.setOnClickListener(v -> {
             this.login(email.getText().toString(), password.getText().toString());
@@ -147,6 +155,12 @@ public class Login extends AppControl {
 
 
     }
-
+    public boolean keepLogin() {
+        if (mAuth.getCurrentUser() != null) {
+            return true;
+        } else {
+          return false;
+        }
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import android.widget.Spinner;
 
 import com.example.eatfl.Gridview.GridAdapter;
 import com.example.eatfl.Model.Item;
+import com.example.eatfl.R;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;

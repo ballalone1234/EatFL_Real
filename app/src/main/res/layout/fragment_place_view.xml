@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".place_view">
+    tools:context=".View.place_view">
 
     <!-- TODO: Update blank fragment layout -->
 

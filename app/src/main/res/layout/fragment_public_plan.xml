@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.my_plan">
+    tools:context=".View.Public_plan">
 
     <GridView
         android:padding="10dp"
-        android:id="@+id/gridViewMyPlan"
+        android:id="@+id/gridViewPublicPlan"
         android:layout_width="414dp"
         android:layout_height="728dp"
         android:horizontalSpacing="20dp"

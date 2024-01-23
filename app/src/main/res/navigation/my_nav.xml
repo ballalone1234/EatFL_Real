@@ -6,7 +6,7 @@
     app:startDestination="@id/login">
     <fragment
         android:id="@+id/login"
-        android:name="com.example.eatfl.Login"
+        android:name="com.example.eatfl.View.Login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.eatfl.Home"
+        android:name="com.example.eatfl.View.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -29,10 +29,16 @@
         <action
             android:id="@+id/action_home2_to_my_plan"
             app:destination="@id/my_plan" />
+        <action
+            android:id="@+id/action_home2_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_home2_to_public_plan"
+            app:destination="@id/public_plan" />
     </fragment>
     <fragment
         android:id="@+id/register"
-        android:name="com.example.eatfl.Register"
+        android:name="com.example.eatfl.View.Register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -42,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/save_money"
-        android:name="com.example.eatfl.save_money"
+        android:name="com.example.eatfl.View.save_money"
         android:label="fragment_save_money"
         tools:layout="@layout/fragment_save_money" >
         <action
@@ -54,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail_item"
-        android:name="com.example.eatfl.detail_item"
+        android:name="com.example.eatfl.View.detail_item"
         android:label="fragment_detail_item"
         tools:layout="@layout/fragment_detail_item" >
         <action
@@ -63,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/place_view"
-        android:name="com.example.eatfl.place_view"
+        android:name="com.example.eatfl.View.place_view"
         android:label="fragment_place_view"
         tools:layout="@layout/fragment_place_view" >
         <action
@@ -72,13 +78,30 @@
     </fragment>
     <fragment
         android:id="@+id/planOrder"
-        android:name="com.example.eatfl.PlanOrder"
+        android:name="com.example.eatfl.View.PlanOrder"
         android:label="fragment_plan_order"
         tools:layout="@layout/fragment_plan_order" />
     <fragment
         android:id="@+id/my_plan"
-        android:name="com.example.eatfl.my_plan"
+        android:name="com.example.eatfl.View.my_plan"
         android:label="fragment_my_plan"
-        tools:layout="@layout/fragment_my_plan" />
+        tools:layout="@layout/fragment_my_plan" >
+        <action
+            android:id="@+id/action_my_plan_to_show_detail_my_plan"
+            app:destination="@id/show_detail_my_plan" />
+    </fragment>
+    <fragment
+        android:id="@+id/show_detail_my_plan"
+        android:name="com.example.eatfl.View.show_detail_my_plan"
+        android:label="fragment_show_detail_my_plan"
+        tools:layout="@layout/fragment_show_detail_my_plan" />
+    <action
+        android:id="@+id/action_global_login"
+        app:destination="@id/login" />
+    <fragment
+        android:id="@+id/public_plan"
+        android:name="com.example.eatfl.View.Public_plan"
+        android:label="fragment_public_plan"
+        tools:layout="@layout/fragment_public_plan" />
 
 </navigation>

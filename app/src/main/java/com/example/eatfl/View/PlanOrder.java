@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.Bundle;
 
@@ -17,6 +17,7 @@ import com.example.eatfl.Gridview.GridAdapterOrder;
 import com.example.eatfl.Model.InlineModel;
 import com.example.eatfl.Model.PlanTopic;
 import com.example.eatfl.Model.Plan_item;
+import com.example.eatfl.R;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
@@ -170,7 +171,7 @@ public class PlanOrder extends AppControl {
         saveBtn.setOnClickListener(v -> {
           addPlan(new PlanTopic(name.getText().toString(),
                   Timestamp.now(),
-                  day,
+                  day + " " + type,
                   Double.parseDouble(money_all),
                   money_spent,
                   Double.parseDouble(money_all) - money_spent,

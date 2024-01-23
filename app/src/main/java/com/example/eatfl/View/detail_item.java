@@ -1,4 +1,4 @@
-package com.example.eatfl;
+package com.example.eatfl.View;
 
 import android.os.Bundle;
 
@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.eatfl.Model.Plan_item;
+import com.example.eatfl.R;
 import com.google.firebase.Timestamp;
 
 /**
