@@ -2,7 +2,10 @@ package com.example.eatfl.View;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,6 +75,7 @@ public class Public_plan extends AppControl {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String userId = mAuth.getCurrentUser().getUid();
+        show_actionbar("แผนสาธารณะ");
         db.collection("plans").whereEqualTo("permission" , "public").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     plans = queryDocumentSnapshots.toObjects(Public_plan_model.class);
                     //add doc_id to plan
@@ -86,5 +90,28 @@ public class Public_plan extends AppControl {
         );
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_public_plan, container, false);
+    }
+
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        GridView gridView = view.findViewById(R.id.gridViewPublicPlan);
+        gridView.setOnItemClickListener((parent, view1, position, id) -> {
+            Public_plan_model item = plans.get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("doc_id", item.getDoc_id());
+            bundle.putString("name", item.getName());
+            bundle.putString("money_all", item.getMoney_all().toString());
+            bundle.putString("cal_to_day", item.getCal_to_day().toString());
+            bundle.putString("pro_to_day", item.getPro_to_day().toString());
+            bundle.putString("pro_to_day", item.getPro_to_day().toString());
+            bundle.putString("day", item.getDuration().toString());
+            bundle.putString("money_save", item.getMoney_save().toString());
+            bundle.putString("money_spent", item.getMoney_spent().toString());
+            NavHostFragment.findNavController(Public_plan.this)
+                    .navigate(R.id.action_public_plan_to_public_plan_detail, bundle);
+        });
+        super.onViewCreated(view, savedInstanceState);
     }
 }

@@ -131,23 +131,28 @@ public class Home extends AppControl {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottom_navbar_show();
+        //onclick item in bottom navbar
         LinearLayout linearLayout = view.findViewById(R.id.bt1);
         LinearLayout btnMyplan = view.findViewById(R.id.my_plan_btn);
         LinearLayout lose_weight = view.findViewById(R.id.loss_weight_btn);
         LinearLayout feed = view.findViewById(R.id.feed_btn);
         linearLayout.setOnClickListener(v -> {
+            bottom_navbar_hide();
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_save_money);
         });
         btnMyplan.setOnClickListener(v -> {
+            bottom_navbar_hide();
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_my_plan);
         });
         feed.setOnClickListener(v -> {
+            bottom_navbar_hide();
             NavHostFragment.findNavController(Home.this)
                     .navigate(R.id.action_home2_to_public_plan);
         });
         lose_weight.setOnClickListener(v -> {
+            bottom_navbar_hide();
             LogOut();
         });
         super.onViewCreated(view, savedInstanceState);

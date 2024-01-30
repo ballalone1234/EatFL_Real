@@ -102,6 +102,26 @@
         android:id="@+id/public_plan"
         android:name="com.example.eatfl.View.Public_plan"
         android:label="fragment_public_plan"
-        tools:layout="@layout/fragment_public_plan" />
+        tools:layout="@layout/fragment_public_plan" >
+        <action
+            android:id="@+id/action_public_plan_to_public_plan_detail"
+            app:destination="@id/public_plan_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/public_plan_detail"
+        android:name="com.example.eatfl.View.public_plan_detail"
+        android:label="fragment_public_plan_detail"
+        tools:layout="@layout/fragment_public_plan_detail" />
+    <action
+        android:id="@+id/action_global_my_plan"
+        app:destination="@id/my_plan" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.eatfl.View.profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <action
+        android:id="@+id/action_global_profile"
+        app:destination="@id/profile" />
 
 </navigation>

@@ -1,14 +1,20 @@
 package com.example.eatfl.View;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -57,6 +63,7 @@ public class my_plan extends AppControl {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +71,15 @@ public class my_plan extends AppControl {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
+
+
     List<My_plan_model> plans;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        show_actionbar("แผนของฉัน");
         // Inflate the layout for this fragment
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("plans").whereEqualTo("owner" , userId).get().addOnSuccessListener(queryDocumentSnapshots -> {

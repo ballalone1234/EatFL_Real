@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.show_detail_my_plan">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText">
+
+        <TextView
+            android:id="@+id/money_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="งบ"
+            android:textFontWeight="@integer/material_motion_duration_long_1"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="92dp" />
+
+        <TextView
+            android:id="@+id/money_all_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="งบที่ใช้"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="92dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/money_spent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="งบที่ใช้"
+            android:textFontWeight="@integer/material_motion_duration_long_1" />
+
+        <TextView
+            android:id="@+id/money_spent_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <TextView
+            android:id="@+id/money_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="งบที่เหลือ"
+            android:textFontWeight="@integer/material_motion_duration_long_1"
+            tools:layout_editor_absoluteX="23dp"
+            tools:layout_editor_absoluteY="122dp" />
+
+        <TextView
+            android:id="@+id/money_save_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="122dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="เวลาที่ใช้"
+            android:textFontWeight="@integer/material_motion_duration_long_1" />
+
+        <TextView
+            android:id="@+id/duration_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <TextView
+            android:id="@+id/cal_to_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="แคลลอรี่ต่อวัน"
+            android:textFontWeight="@integer/material_motion_duration_long_1" />
+
+        <TextView
+            android:id="@+id/cal_to_day_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/Pro_to_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="โปรตีนต่อวัน"
+            android:textFontWeight="@integer/material_motion_duration_long_1" />
+
+        <TextView
+            android:id="@+id/Pro_to_day_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/copyPlanBTN"
+        android:layout_width="122dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:text="คัดลอกแผน"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintStart_toEndOf="@+id/editTextText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridView
+        android:id="@+id/gridViewOrder"
+        android:layout_width="374dp"
+        android:layout_height="626dp"
+        android:layout_marginTop="192dp"
+        android:horizontalSpacing="10dp"
+        android:isScrollContainer="true"
+        android:verticalSpacing="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,26 @@
 package com.example.eatfl.View;
 
+import android.app.AlertDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eatfl.Gridview.GridAdapterMyOrder;
 import com.example.eatfl.Model.Plan_item;
@@ -63,6 +73,7 @@ public class show_detail_my_plan extends AppControl {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -72,7 +83,56 @@ public class show_detail_my_plan extends AppControl {
         return inflater.inflate(R.layout.fragment_show_detail_my_plan, container, false);
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_my_plan, menu);
 
+        // Get the MenuItem for the item
+        MenuItem item = menu.findItem(R.id.bin)
+                ,item2 = menu.findItem(R.id.share);
+        item.setOnMenuItemClickListener(menuItem -> {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Confirm Delete")
+                    .setMessage("Are you sure you want to delete this plan?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User clicked the "Yes" button, delete the plan
+                        db.collection("plans").document(doc_id).delete();
+                        Toast.makeText(getContext(), "ลบแผนเรียบร้อย", Toast.LENGTH_SHORT).show();
+                        NavHostFragment.findNavController(show_detail_my_plan.this)
+                                .navigate(R.id.action_global_my_plan);
+                    })
+                    .setNegativeButton("No", null) // User clicked the "No" button, do nothing
+                    .show();
+            return true;}
+        );
+
+        item2.setOnMenuItemClickListener(menuItem -> {
+            //check permission
+            db.collection("plans").document(doc_id).get().addOnSuccessListener(documentSnapshot -> {
+                if(documentSnapshot.get("permission").equals("public")){
+                    //update permission
+                    db.collection("plans").document(doc_id).update("permission" , "private");
+                    Toast.makeText(getContext(), "แผนของคุณถูกเปลี่ยนเป็นส่วนตัวแล้ว", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //update permission
+                    db.collection("plans").document(doc_id).update("permission" , "public");
+                    Toast.makeText(getContext(), "แผนของคุณถูกแชร์แล้ว", Toast.LENGTH_SHORT).show();
+                }
+            });
+            return true;}
+        );
+
+
+        // Get the Drawable for the item
+        Drawable icon = item.getIcon();
+
+        // If the icon exists, apply the white tint
+        if (icon != null) {
+            DrawableCompat.setTint(icon, ContextCompat.getColor(getContext(), R.color.white));
+        }
+    }
 
 
     String doc_id, name, money_all, cal_to_day, pro_to_day, day, money_save, money_spent;

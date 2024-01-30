@@ -9,7 +9,7 @@ public class My_plan_model  {
     private Double pro_to_day;
     private String doc_id;
 
-
+    private String owner;
 
     private String duration;
     public My_plan_model() {
@@ -58,5 +58,13 @@ public class My_plan_model  {
 
     public Double getMoney_save() {
         return money_save;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

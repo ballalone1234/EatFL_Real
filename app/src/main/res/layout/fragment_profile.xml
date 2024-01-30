@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/iconamoon_heart_fill"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/menu_my_maps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="แผนที่ฉันชอบ"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/menu_my_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="แผนของฉัน"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/menu_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="เปลี่ยนรหัสผ่าน"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/menu_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ออกจากระบบ"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+        <!-- Add more TextViews for other profile information -->
+
+    </LinearLayout>
+
+</ScrollView>

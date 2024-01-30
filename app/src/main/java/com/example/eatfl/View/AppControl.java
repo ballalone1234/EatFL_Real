@@ -13,6 +13,7 @@ import com.example.eatfl.Model.Plan_item;
 import com.example.eatfl.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -316,6 +317,8 @@ public class AppControl extends Fragment {
         NavHostFragment.findNavController(AppControl.this)
                 .navigate(R.id.action_global_login);
         }
+
+
 
 
 
