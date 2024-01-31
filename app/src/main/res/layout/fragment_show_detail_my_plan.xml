@@ -196,12 +196,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/sharePlanBTN"
+        android:id="@+id/usePlanBTN"
         android:layout_width="122dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
-        android:text="แบ่งปันแผน"
+        android:text="ใช้แผนนี้"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toEndOf="@+id/editTextText"

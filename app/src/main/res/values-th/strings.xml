@@ -47,4 +47,6 @@
     <string name="เพิ่มในแผน" />
     <string name="add_to_plan">เพิ่มในแผน</string>
     <string name="amont">ปริมาณ</string>
+    <string name="ProteinToday">Protein Today</string>
+    <string name="planing">แผนที่กำลังใช้</string>
 </resources>

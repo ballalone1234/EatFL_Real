@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -79,6 +80,9 @@ public class Home extends AppControl {
     }
 
    //รับค่าจากหน้า Login มาแสดงผล
+
+    TextView planName, calToday, proToday , moneyToUse;
+    ConstraintLayout myPlan;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +96,7 @@ public class Home extends AppControl {
         //String username = bundle.getString("my_key");
         DocumentReference docRef = db.collection("users").document(Objects.requireNonNull(mAuth.getUid()));
         TextView tv = view.findViewById(R.id.calshosw);
+        TextView pv = view.findViewById(R.id.proshosw);
         // Retrieve the document
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -102,17 +107,66 @@ public class Home extends AppControl {
                     Map<String, Object> data = document.getData();
                     // Now you can use the data
                     // For example, to get the username:
-
+                    planName = view.findViewById(R.id.my_plan_name);
+                    calToday = view.findViewById(R.id.my_plan_cal);
+                    proToday = view.findViewById(R.id.my_plan_pro);
+                    moneyToUse = view.findViewById(R.id.my_plan_money);
+                    myPlan = view.findViewById(R.id.conCurrentPlan);
                     String username = (String) data.get("username");
                     Number BMR = (Number) data.get("BMR");
-
-
-
-
+                    Number weight = (Number) data.get("weight");
+                    Number height = (Number) data.get("height");
+                    Double minprotien = weight.doubleValue() * 1.2;
+                    Double maxprotien = weight.doubleValue() * 2;
+                    String protienPerDay = String.format("%.2f", minprotien) + " - " + String.format("%.2f", maxprotien) + " g.";
                     //get age
 
+                    DocumentReference planRef = data.get("current_plan") != null ? (DocumentReference) data.get("current_plan") : null;
+                    planName.setText("คุณยังไม่มีแผนในปัจจุบัน");
                     // Set the username to the TextView
-                    tv.setText(String.format("%.2f", BMR));
+                    assert planRef != null;
+                    planRef.get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            DocumentSnapshot document1 = task1.getResult();
+                            if (document1.exists()) {
+                                // Document was found, you can retrieve the data with the getData() method
+                                Map<String, Object> data1 = document1.getData();
+                                // Now you can use the data
+                                // For example, to get the username:
+                                String planname = (String) data1.get("name");
+                                Double planCal = (Double) data1.get("cal_to_day");
+                                Double planPro = (Double) data1.get("pro_to_day");
+                                Double planMoney = (Double) data1.get("money_all");
+                                planName.setText(planname);
+                                calToday.setText(planCal.toString());
+                                proToday.setText(planPro.toString());
+                                moneyToUse.setText(planMoney.toString());
+                                myPlan.setOnClickListener(
+                                        v -> {
+                                            Bundle bundle1 = new Bundle();
+                                            bundle1.putString("doc_id", planRef.getId());
+                                            bundle1.putString("name", planname);
+                                            bundle1.putString("money_all", planMoney.toString());
+                                            bundle1.putString("cal_to_day", planCal.toString());
+                                            bundle1.putString("pro_to_day", planPro.toString());
+                                            bundle1.putString("day", data1.get("duration").toString());
+                                            bundle1.putString("money_save", data1.get("money_save").toString());
+                                            bundle1.putString("money_spent", data1.get("money_spent").toString());
+                                            bundle1.putString("owner", data1.get("owner").toString());
+
+                                            show_actionbar("แผนปัจจุบันของฉัน");
+                                            NavHostFragment.findNavController(Home.this)
+                                                    .navigate(R.id.action_home2_to_show_detail_my_plan, bundle1);
+                                        }
+                                );
+                            } else {
+                                // Document was not found
+                                Log.d(TAG, "No such document");
+                            }
+                        }
+                    });
+                    tv.setText(String.format("%.2f kcal.", BMR));
+                    pv.setText(protienPerDay);
                 } else {
                     // Document was not found
                     Log.d(TAG, "No such document");
@@ -137,7 +191,6 @@ public class Home extends AppControl {
         getUsernameByDocumentId(mAuth.getCurrentUser().getUid());
         LinearLayout linearLayout = view.findViewById(R.id.bt1);
         LinearLayout btnMyplan = view.findViewById(R.id.my_plan_btn);
-        LinearLayout lose_weight = view.findViewById(R.id.loss_weight_btn);
         LinearLayout feed = view.findViewById(R.id.feed_btn);
         linearLayout.setOnClickListener(v -> {
             bottom_navbar_hide();
@@ -151,13 +204,12 @@ public class Home extends AppControl {
         });
         feed.setOnClickListener(v -> {
             bottom_navbar_hide();
-            NavHostFragment.findNavController(Home.this)
-                    .navigate(R.id.action_home2_to_public_plan);
+            Bundle bundle = new Bundle();
+            bundle.putString("filter","all");
+
+            NavHostFragment.findNavController(this).navigate(R.id.action_home2_to_public_plan,bundle);
         });
-        lose_weight.setOnClickListener(v -> {
-            bottom_navbar_hide();
-            LogOut();
-        });
+
 
 
         super.onViewCreated(view, savedInstanceState);

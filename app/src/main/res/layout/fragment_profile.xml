@@ -44,19 +44,10 @@
             android:paddingTop="16dp">
 
             <TextView
-                android:id="@+id/menu_my_maps"
+                android:id="@+id/menu_my_likes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="แผนที่ฉันชอบ"
-                android:textSize="20sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/menu_my_plan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="แผนของฉัน"
                 android:textSize="20sp"
                 android:padding="16dp"
                 android:background="?android:attr/selectableItemBackground" />

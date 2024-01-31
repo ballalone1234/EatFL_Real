@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_home2_to_public_plan"
             app:destination="@id/public_plan" />
+        <action
+            android:id="@+id/action_home2_to_show_detail_my_plan"
+            app:destination="@id/show_detail_my_plan" />
     </fragment>
     <fragment
         android:id="@+id/register"
@@ -119,7 +122,11 @@
         android:id="@+id/profile"
         android:name="com.example.eatfl.View.profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_public_plan"
+            app:destination="@id/public_plan" />
+    </fragment>
     <action
         android:id="@+id/action_global_profile"
         app:destination="@id/profile" />

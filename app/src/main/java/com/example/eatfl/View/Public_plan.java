@@ -20,6 +20,7 @@ import com.example.eatfl.Model.Public_plan_model;
 import com.example.eatfl.R;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,20 +75,49 @@ public class Public_plan extends AppControl {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        plans = new ArrayList<>();
+        assert getArguments() != null;
+        Bundle bundle = getArguments();
+        assert bundle != null;
+        String filter = bundle.getString("filter");
         String userId = mAuth.getCurrentUser().getUid();
         show_actionbar("แผนสาธารณะ");
-        db.collection("plans").whereEqualTo("permission" , "public").get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    plans = queryDocumentSnapshots.toObjects(Public_plan_model.class);
-                    //add doc_id to plan
-                    plans.forEach(plan -> {
-                        plan.setDoc_id(queryDocumentSnapshots.getDocuments().get(plans.indexOf(plan)).getId());
-                        Log.d("plan", plan.getDoc_id());
-                    });
-                    GridAdapterPublicPlan adapter = new GridAdapterPublicPlan(getContext(),plans);
-                    GridView grid = getView().findViewById(R.id.gridViewPublicPlan);
-                    grid.setAdapter(adapter);
-                }
-        );
+        Log.i("filter", filter);
+        assert filter != null;
+        if(filter.equals("like")) {
+            Log.i("filter1", filter);
+            db.collection("plans").whereEqualTo("permission", "public").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                        //check like collection is doc_id same user_id
+                        queryDocumentSnapshots.forEach(queryDocumentSnapshot -> {
+                            db.collection("plans").document(queryDocumentSnapshot.getId()).collection("like").document(userId).get().addOnSuccessListener(documentSnapshot -> {
+                                if (documentSnapshot.exists()) {
+                                    //add plan to list
+                                    Public_plan_model plan = queryDocumentSnapshot.toObject(Public_plan_model.class);
+                                    plan.setDoc_id(queryDocumentSnapshot.getId());
+                                    plans.add(plan);
+                                    GridAdapterPublicPlan adapter = new GridAdapterPublicPlan(getContext(), plans);
+                                    GridView grid = getView().findViewById(R.id.gridViewPublicPlan);
+                                    grid.setAdapter(adapter);
+                                }
+                            });
+                        });
+                    }
+            );
+        }else {
+            Log.i("filter2", filter);
+            db.collection("plans").whereEqualTo("permission", "public").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                        plans = queryDocumentSnapshots.toObjects(Public_plan_model.class);
+                        //add doc_id to plan
+                        plans.forEach(plan -> {
+                            plan.setDoc_id(queryDocumentSnapshots.getDocuments().get(plans.indexOf(plan)).getId());
+                            Log.d("plan", plan.getDoc_id());
+                        });
+                        GridAdapterPublicPlan adapter = new GridAdapterPublicPlan(getContext(), plans);
+                        GridView grid = getView().findViewById(R.id.gridViewPublicPlan);
+                        grid.setAdapter(adapter);
+                    }
+            );
+        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_public_plan, container, false);
     }

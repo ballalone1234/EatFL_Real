@@ -137,7 +137,7 @@ public class show_detail_my_plan extends AppControl {
 
     String doc_id, name, money_all, cal_to_day, pro_to_day, day, money_save, money_spent;
 
-    Button shareBtn;
+    Button usePlanBTN;
     List<Plan_item> plan_items;
     public void onViewCreated(View view, Bundle savedInstanceState) {
         String userId = mAuth.getCurrentUser().getUid();
@@ -175,9 +175,12 @@ public class show_detail_my_plan extends AppControl {
             gridView.setAdapter(adapter);
 
         });
-        shareBtn = view.findViewById(R.id.sharePlanBTN);
-        shareBtn.setOnClickListener(v -> {
-          db.collection("plans").document(doc_id).update("permission" , "public");
+        usePlanBTN = view.findViewById(R.id.usePlanBTN);
+        usePlanBTN.setOnClickListener(v -> {
+          db.collection("users").document(userId).update("current_plan" , db.document("plans/"+doc_id));
+            Toast.makeText(getContext(), "ใช้แผนนี้เป็นแผนปัจจุบัน", Toast.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(show_detail_my_plan.this)
+                    .navigate(R.id.action_global_home2);
         });
 
 

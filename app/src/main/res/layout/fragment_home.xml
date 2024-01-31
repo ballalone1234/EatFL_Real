@@ -10,8 +10,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="413dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="724dp"
         android:textAlignment="center">
 
         <TextView
@@ -19,19 +19,164 @@
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:paddingHorizontal="20dp"
             android:text="@string/headertext"
             android:textColor="#E91E63"
-            android:textSize="34sp" />
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/protextlabel"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_below="@+id/calshosw"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="20dp"
+            android:text="@string/ProteinToday"
+            android:textColor="#E91E63"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/planing"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_below="@+id/linearLayout10"
+            android:layout_marginTop="9dp"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="20dp"
+            android:text="@string/planing"
+            android:textColor="#E91E63"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/calshosw"
             android:layout_width="match_parent"
-            android:layout_height="82dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/Textview2"
-            android:layout_marginTop="98dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/calShow"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="34sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/conCurrentPlan"
+            android:layout_width="393dp"
+            android:layout_height="165dp"
+            android:layout_below="@+id/linearLayout10"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/cus_edit_order">
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.746"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
+                    android:text="โปรตีนต่อวัน" />
+
+                <TextView
+                    android:id="@+id/my_plan_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="330dp"
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.746"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
+                    android:text="แคลรอรี่ต่อวัน" />
+
+                <TextView
+                    android:id="@+id/my_plan_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/my_plan_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textColor="#E91E63"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.051"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="330dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.746"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_plan_name">
+
+                <TextView
+                    android:id="@+id/my_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
+                    android:text="งบที่ใช้" />
+
+                <TextView
+                    android:id="@+id/my_plan_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="TextView" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/proshosw"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_below="@+id/protextlabel"
+            android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/calShow"
             android:textAlignment="center"
@@ -39,15 +184,16 @@
             android:textSize="34sp" />
 
         <LinearLayout
+            android:id="@+id/linearLayout10"
             android:layout_width="370dp"
             android:layout_height="105dp"
             android:layout_alignWithParentIfMissing="false"
-            android:layout_below="@+id/calshosw"
+            android:layout_below="@+id/proshosw"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="73dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
             android:background="@drawable/cus_edit2"
             android:baselineAligned="false"
             android:clipToPadding="false"
@@ -58,7 +204,7 @@
 
             <LinearLayout
                 android:id="@+id/bt1"
-                android:layout_width="wrap_content"
+                android:layout_width="37dp"
                 android:layout_height="73dp"
                 android:layout_weight="1"
 
@@ -75,30 +221,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/save_money"
-                    android:textAlignment="center"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/loss_weight_btn"
-                android:layout_width="45dp"
-                android:layout_height="74dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/loss_weight" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/loss_weight"
                     android:textAlignment="center"
                     android:textSize="12sp" />
 
@@ -131,8 +253,8 @@
                 android:id="@+id/feed_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="75dp"
-                android:orientation="vertical"
                 android:layout_weight="1"
+                android:orientation="vertical"
 
                 >
 

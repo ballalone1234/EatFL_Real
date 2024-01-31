@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,7 +69,7 @@ public class profile extends AppControl {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
-    TextView menu_logout;
+    TextView menu_logout , menu_like;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -79,11 +80,19 @@ public class profile extends AppControl {
         TextView email = view.findViewById(R.id.profile_email);
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         menu_logout = view.findViewById(R.id.menu_logout);
+        menu_like = view.findViewById(R.id.menu_my_likes);
         menu_logout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             //go to login
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new Login()).commit();
 
+        });
+        menu_like.setOnClickListener(v -> {
+            //add bundle to send filter
+            Bundle bundle = new Bundle();
+            bundle.putString("filter","like");
+
+            NavHostFragment.findNavController(this).navigate(R.id.action_profile_to_public_plan,bundle);
         });
     }
 }
