@@ -2,8 +2,11 @@ package com.example.eatfl.View;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,4 +70,20 @@ public class profile extends AppControl {
     }
     TextView menu_logout;
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //get current user
+        TextView user = view.findViewById(R.id.profile_name);
+        user.setText(username_cur);
+        TextView email = view.findViewById(R.id.profile_email);
+        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        menu_logout = view.findViewById(R.id.menu_logout);
+        menu_logout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            //go to login
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new Login()).commit();
+
+        });
+    }
 }

@@ -317,7 +317,19 @@ public class AppControl extends Fragment {
         NavHostFragment.findNavController(AppControl.this)
                 .navigate(R.id.action_global_login);
         }
-
+        public String username_cur = "ball";
+        public String getUsernameByDocumentId(String documentId) {
+        DocumentReference docRef = db.collection("users").document(documentId);
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                username_cur = documentSnapshot.getString("username");
+                Log.i("username", username_cur);
+            } else {
+                Log.d("Error 47", "No such document");
+            }
+        }).addOnFailureListener(e -> Log.d("Error 47", "get failed with ", e));
+        return username_cur;
+        }
 
 
 

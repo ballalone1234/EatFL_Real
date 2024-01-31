@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
@@ -132,6 +134,7 @@ public class Home extends AppControl {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottom_navbar_show();
         //onclick item in bottom navbar
+        getUsernameByDocumentId(mAuth.getCurrentUser().getUid());
         LinearLayout linearLayout = view.findViewById(R.id.bt1);
         LinearLayout btnMyplan = view.findViewById(R.id.my_plan_btn);
         LinearLayout lose_weight = view.findViewById(R.id.loss_weight_btn);
@@ -155,6 +158,8 @@ public class Home extends AppControl {
             bottom_navbar_hide();
             LogOut();
         });
+
+
         super.onViewCreated(view, savedInstanceState);
     }
 }

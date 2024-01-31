@@ -74,6 +74,7 @@ public class Login extends AppControl {
                         NavHostFragment.findNavController(Login.this)
                                 .navigate(R.id.action_login_to_home2, bundle);
                         //FirebaseUser user = mAuth.getCurrentUser();
+
                         //updateUI(user);
                     } else {
 

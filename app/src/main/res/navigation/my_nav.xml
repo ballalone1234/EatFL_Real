@@ -123,5 +123,8 @@
     <action
         android:id="@+id/action_global_profile"
         app:destination="@id/profile" />
+    <action
+        android:id="@+id/action_global_home2"
+        app:destination="@id/home2" />
 
 </navigation>
