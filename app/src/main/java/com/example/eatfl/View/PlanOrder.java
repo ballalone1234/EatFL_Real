@@ -115,7 +115,9 @@ public class PlanOrder extends AppControl {
                             else {
                                 money_spent += item.getPrice()*item.getAmount();
                             }
+                            item.setDocId(document.getId());
                             items.add(item);
+
                         }
                         Log.i("recipe", recipe.toString());
                         TextView money_spent_view = view.findViewById(R.id.money_spent_value);
@@ -166,8 +168,8 @@ public class PlanOrder extends AppControl {
             protein_to_day = Double.parseDouble(proteinValue)/(Double.parseDouble(day)*30);
         }
 
-        calorie.setText(calories_to_day.toString());
-        protein.setText(protein_to_day.toString());
+        calorie.setText(String.format("%.2f", calories_to_day) + " กิโลแคลอรี่");
+        protein.setText(String.format("%.2f", protein_to_day) + " กรัมโปรตีน");
         saveBtn.setOnClickListener(v -> {
           addPlan(new PlanTopic(name.getText().toString(),
                   Timestamp.now(),

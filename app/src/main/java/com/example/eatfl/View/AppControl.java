@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.eatfl.Model.PlanTopic;
 import com.example.eatfl.Model.Plan_item;
 import com.example.eatfl.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +30,7 @@ import java.net.URL;
 import java.util.concurrent.Executors;
 
 public class AppControl extends Fragment {
+
     String current_location = "Hà Nội";
     String apiKey = "AIzaSyAg73jf1U-e9efFTXy4hiCA_Wef_b0B26I"; // replace with your API key
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -196,7 +198,7 @@ public class AppControl extends Fragment {
 
     }
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -221,11 +223,9 @@ public class AppControl extends Fragment {
         db.collection("plans").document(planName).collection("cart").document()
                 .set(plan_item)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "เพิ่มในแผนสำเร็จ2", Toast.LENGTH_SHORT).show();
                     Log.i("addPlanToFireStore", "เพิ่มในแผนสำเร็จ2");
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "เพิ่มในแผนไม่สำเร็จ2", Toast.LENGTH_SHORT).show();
                     Log.i("addPlanToFireStore", "เพิ่มในแผนไม่สำเร็จ2");
                 });}
 
@@ -233,29 +233,32 @@ public class AppControl extends Fragment {
 
     protected void addPlan(PlanTopic planTopic) {
         String userId = mAuth.getCurrentUser().getUid();
-        db.collection("plans").document()
-                .set(planTopic)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
-                    Log.i("addPlanToFireStore", "เพิ่มแผนสำเร็จ");
-                    db.collection("users").document(userId).collection("cart")
-                            .get()
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Plan_item item = document.toObject(Plan_item.class);
-                                        addItemToPlan(item, planTopic.getName());
+        db.collection("plans").add(planTopic)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        String lastPlanId = documentReference.getId();
+                        Toast.makeText(getContext(), "เพิ่มแผนสำเร็จ", Toast.LENGTH_SHORT).show();
+                        Log.i("addPlanToFireStore", "เพิ่มแผนสำเร็จ");
+
+                        db.collection("users").document(userId).collection("cart")
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Plan_item item = document.toObject(Plan_item.class);
+                                            addItemToPlan(item,lastPlanId);
+                                        }
+                                    } else {
+                                        Log.d("Error 47", "Error getting documents: ", task.getException());
                                     }
-                                } else {
-                                    Log.d("Error 47", "Error getting documents: ", task.getException());
-                                }
-                            });
+                                });
+                    }
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "เพิ่มแผนไม่สำเร็จ", Toast.LENGTH_SHORT).show();
                     Log.i("addPlanToFireStore", "เพิ่มแผนไม่สำเร็จ");
                 });
-
     }
     public class SendPostRequestAsyncTask extends AsyncTask<String, Void, String> {
         private PlanOrder planOrder;
@@ -299,6 +302,13 @@ public class AppControl extends Fragment {
 
         @Override
         protected void onPostExecute(String response) {
+            // Check if the response is null
+            if (response == null) {
+                // Handle the error appropriately, e.g., show an error message to the user
+                System.out.println("Error: The response from the server is null.");
+                return;
+            }
+
             // Handle the response string here
             System.out.println(response);
             try {
@@ -332,6 +342,17 @@ public class AppControl extends Fragment {
         }
 
 
-
+        public void deleteOrderByDocumentId(String documentId) {
+        db.collection("users").document(mAuth.getCurrentUser().getUid()).collection("cart").document(documentId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "ลบรายการสำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("deleteOrder", "ลบรายการสำเร็จ");
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "ลบรายการไม่สำเร็จ", Toast.LENGTH_SHORT).show();
+                    Log.i("deleteOrder", "ลบรายการไม่สำเร็จ");
+                });
+        }
 
 }

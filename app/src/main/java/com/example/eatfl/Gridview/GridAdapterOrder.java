@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.eatfl.Model.Plan_item;
 import com.example.eatfl.R;
+import com.example.eatfl.View.AppControl;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -64,7 +67,16 @@ public class GridAdapterOrder extends BaseAdapter {
         else {
             price = price*item.getAmount();
         }
-
+        Button delete =convertView.findViewById(R.id.deleteBTN);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("users").document(AppControl.mAuth.getCurrentUser().getUid()).collection("cart").document(item.getDocId()).delete();
+                items.remove(position);
+                notifyDataSetChanged();
+            }
+        });
         name.setText(item.getPart());
         price_text.setText(String.format("%.2f", price) );
         amount_ex.setText(item.getEt());

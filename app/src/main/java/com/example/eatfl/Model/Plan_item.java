@@ -10,6 +10,8 @@ public class Plan_item {
     private Timestamp timestamp;
     private String image;
     private String et;
+
+    private String docId;
     public Plan_item() {}
     public Plan_item(String part, Double price, Double amount, String et, String location, String image, Timestamp timestamp) {
         this.part = part;
@@ -52,5 +54,13 @@ public class Plan_item {
 
     public Timestamp getTimestamp() {
         return timestamp;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
+    }
+
+    public String getDocId() {
+        return docId;
     }
 }

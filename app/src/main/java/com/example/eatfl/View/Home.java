@@ -124,7 +124,7 @@ public class Home extends AppControl {
                     DocumentReference planRef = data.get("current_plan") != null ? (DocumentReference) data.get("current_plan") : null;
                     planName.setText("คุณยังไม่มีแผนในปัจจุบัน");
                     // Set the username to the TextView
-                    assert planRef != null;
+                    if (planRef != null)
                     planRef.get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             DocumentSnapshot document1 = task1.getResult();
@@ -138,9 +138,9 @@ public class Home extends AppControl {
                                 Double planPro = (Double) data1.get("pro_to_day");
                                 Double planMoney = (Double) data1.get("money_all");
                                 planName.setText(planname);
-                                calToday.setText(planCal.toString());
-                                proToday.setText(planPro.toString());
-                                moneyToUse.setText(planMoney.toString());
+                                calToday.setText(String.format("%.2f", planCal) + " กิโลแคลอรี่");
+                                proToday.setText(String.format("%.2f", planPro) + " กรัมโปรตีน");
+                                moneyToUse.setText(String.format("%.2f", planMoney) + " บาท");
                                 myPlan.setOnClickListener(
                                         v -> {
                                             Bundle bundle1 = new Bundle();

@@ -61,9 +61,9 @@ public class GridAdapterPublicPlan extends BaseAdapter {
 
 
         name.setText(plan.getName());
-        money.setText(plan.getMoney_all().toString());
-        cal.setText(plan.getCal_to_day().toString());
-        pro.setText(plan.getPro_to_day().toString());
+        money.setText(String.format("%.2f", plan.getMoney_all()) + " บาท");
+        cal.setText(String.format("%.2f", plan.getCal_to_day()) + " กิโลแคลอรี่");
+        pro.setText(String.format("%.2f", plan.getPro_to_day()) + " กรัมโปรตีน");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("users").document(plan.getOwner()).get().addOnSuccessListener(documentSnapshot -> {

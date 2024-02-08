@@ -187,10 +187,10 @@ public class public_plan_detail extends AppControl {
             day_view.setText(day);
             money_all_view.setText(money_all + " บาท");
             name_view.setText(name);
-            cal_to_day_view.setText(cal_to_day);
-            pro_to_day_view.setText(pro_to_day);
-            money_spent_view.setText(money_spent+ " บาท");
-            money_save_view.setText(money_save+ " บาท");
+            cal_to_day_view.setText(String.format("%.2f", Double.parseDouble(cal_to_day)) + " กิโลแคลอรี่");
+            pro_to_day_view.setText(String.format("%.2f", Double.parseDouble(pro_to_day)) + " กรัม");
+            money_spent_view.setText(String.format("%.2f", Double.parseDouble(money_all) - Double.parseDouble(money_save)) + " บาท");
+            money_save_view.setText(String.format("%.2f", Double.parseDouble(money_save)) + " บาท");
 
 
         }

@@ -16,7 +16,7 @@
 
     <string-array name="type_item_array">
         <item>g</item>
-        <item>kilogram</item>
+        <item>kg</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
